@@ -7,21 +7,21 @@ $ go get github.com/sachsgiri/workerpool
 ##How to use 
 //In your main.go
 
-type Work struct {
-	Name      string "The Name of a person"
-	BirthYear int    "The Year the person was born"
-	WP        *workerpool.Pool
-}
-func (work *Work) DoWork(workRoutine int) {
-	time.Sleep(1 * time.Second)
-	fmt.Printf("finished work for %s\n", work.Name)
-	//panic("test")
-}
-func main() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
-	var number int32
-	//number of routines, que capacity
-	pool := workerpool.New(runtime.NumCPU(), 10)
+	type Work struct {
+		Name      string "The Name of a person"
+		BirthYear int    "The Year the person was born"
+		WP        *workerpool.Pool
+	}
+	func (work *Work) DoWork(workRoutine int) {
+		time.Sleep(1 * time.Second)
+		fmt.Printf("finished work for %s\n", work.Name)
+		//panic("test")
+	}
+	func main() {
+		runtime.GOMAXPROCS(runtime.NumCPU())
+		var number int32
+		//number of routines, que capacity
+		pool := workerpool.New(runtime.NumCPU(), 10)
 
 		for i := 0; i < 10; i++ {
 			go func() {
@@ -42,5 +42,5 @@ func main() {
 				time.Sleep(1* time.Second)
 			}()
 		}
-}
+	}
 
